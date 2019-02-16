@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class DashboardController {
 
-	@GetMapping("/dashboard")
+	@GetMapping("/index")
 	public String showFormHome() {
-		return "dashboard";
+		return "index";
 	}
 
 

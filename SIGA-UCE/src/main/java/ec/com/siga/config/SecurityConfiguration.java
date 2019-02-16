@@ -43,12 +43,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/", "/home", "/css/*", "/imgs/*", "/js/*", "/register").permitAll()
+		http.authorizeRequests().antMatchers("/", "/home", "/css/*", "/scss/*", "/imgs/*", "/js/*", "/register", "/vendor/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
 				.formLogin().loginPage("/login").loginProcessingUrl("/auten")
 				.usernameParameter("username").passwordParameter("password")
-				.defaultSuccessUrl("/dashboard").permitAll()
+				.defaultSuccessUrl("/index").permitAll()
 				.and()
 				.logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout")
 				.permitAll();

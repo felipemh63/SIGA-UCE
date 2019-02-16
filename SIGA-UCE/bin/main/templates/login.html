@@ -1,63 +1,79 @@
-<!doctype html>
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-<!-- Required meta tags -->
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/singin.css">
+  <head>
 
-<title>Sing In</title>
-</head>
-<body class="text-center">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
+    <title>SB Admin - Login</title>
 
-	<form class="form-signin" th:action="@{/auten}" method="POST">
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-		<img class="mb-4" src="imgs/key.png" alt="" width="72" height="72">
-		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-		<label for="inputUsername" class="sr-only">Username</label> 
-		<input type="text" class="form-control" placeholder="Username" required autofocus name="username" /> 
-		<label for="inputPassword" class="sr-only">Password</label> 
-		<input type="password" class="form-control" placeholder="Password" required  name="password" /> 
-		
-		<div th:if="${error != null}" class="alert alert-danger" role="alert">Invalid username or password!</div>
-        <div th:if="${logout != null}" class="alert alert-info" role="alert">Logout successfully!</div>
-		
-		<div class="checkbox mb-3">
-			<label> <input type="checkbox" value="remember-me">	Remember me	</label>
-			
-		</div>
-		<div class="mb-3">
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-		</div>
-		<div class="d-flex justify-content-center links">
-					Don't have an account?<a th:href="@{/register}">Sign Up</a>
-				</div>
-				<div class="d-flex justify-content-center">
-					<a href="#">Forgot your password?</a>
-				</div>
-		
-		<p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
-	</form>
-	
-	
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-		crossorigin="anonymous"></script>
-	<script src="js/bootstrap.min.js"></script>
-</body>
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+  </head>
+
+  <body class="bg-dark">
+
+    <div class="container">
+      <div class="card card-login mx-auto mt-5">
+        <div class="card-header">Login</div>
+        <div class="card-body">
+         
+          <form  th:action="@{/auten}" method="POST">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <div class="form-group">
+              <div class="form-label-group">
+                <input type="text" id="inputUsername" class="form-control" placeholder="User name" required="required" autofocus="autofocus" name="username">
+                <label for="inputUsername">User name</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-label-group">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required" name="password">
+                <label for="inputPassword">Password</label>
+              </div>
+            </div>
+            <div th:if="${error != null}" class="alert alert-danger" role="alert">Invalid username or password!</div>
+        	<div th:if="${logout != null}" class="alert alert-info" role="alert">Logout successfully!</div>
+            <div class="form-group">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="remember-me">
+                  Remember Password
+                </label>
+              </div>
+            </div>
+            
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+          </form>
+          <div class="text-center">
+            <a class="d-block small mt-3" th:href="@{/register}">Register an Account</a>
+            <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+            <p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  </body>
+
 </html>

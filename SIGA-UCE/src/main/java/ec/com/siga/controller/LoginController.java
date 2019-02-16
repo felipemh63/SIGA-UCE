@@ -35,7 +35,7 @@ public class LoginController {
 	
 	@PostMapping({ "/loginsuccess"})
 	public String loginCheck() {
-		return "/dashboard";
+		return "/index";
 		
 	}
 
