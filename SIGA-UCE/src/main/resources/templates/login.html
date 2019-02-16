@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/singin.css">
+
+<title>Sing In</title>
+</head>
+<body class="text-center">
+
+
+	<form class="form-signin" th:action="@{/auten}" method="POST">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<img class="mb-4" src="imgs/key.png" alt="" width="72" height="72">
+		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+		<label for="inputUsername" class="sr-only">Username</label> 
+		<input type="text" class="form-control" placeholder="Username" required autofocus name="username" /> 
+		<label for="inputPassword" class="sr-only">Password</label> 
+		<input type="password" class="form-control" placeholder="Password" required  name="password" /> 
+		
+		<div th:if="${error != null}" class="alert alert-danger" role="alert">Invalid username or password!</div>
+        <div th:if="${logout != null}" class="alert alert-info" role="alert">Logout successfully!</div>
+		
+		<div class="checkbox mb-3">
+			<label> <input type="checkbox" value="remember-me">	Remember me	</label>
+			
+		</div>
+		<div class="mb-3">
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		</div>
+		<div class="d-flex justify-content-center links">
+					Don't have an account?<a th:href="@{/register}">Sign Up</a>
+				</div>
+				<div class="d-flex justify-content-center">
+					<a href="#">Forgot your password?</a>
+				</div>
+		
+		<p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
+	</form>
+	
+	
+
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+		crossorigin="anonymous"></script>
+	<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
