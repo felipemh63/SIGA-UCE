@@ -1,11 +1,15 @@
 package ec.com.siga.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 //import org.apache.commons.logging.Log;
 //import org.apache.commons.logging.LogFactory;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 //import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 //import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,25 +20,26 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 //import ec.com.siga.SIGA.controller.AuthenticationController;
 
 @Configuration
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	//private static final Log LOG = LogFactory.getLog(AuthenticationController.class);
 
-	/**@Autowired
-	@Qualifier("authenticationService")
-	private UserDetailsService authenticationService;**/
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserDetailsService userServiceImpl;
 
-	/**@Autowired
+	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(authenticationService).passwordEncoder(new BCryptPasswordEncoder());
-	}**/
+		auth.userDetailsService(userServiceImpl).passwordEncoder(new BCryptPasswordEncoder());
+	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -48,7 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout")
 				.permitAll();
 	}
-	@Bean
+	/**@Bean
     @Override
     public UserDetailsService userDetailsService() {
         UserDetails user =
@@ -59,6 +64,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .build();
 
         return new InMemoryUserDetailsManager(user);
-    }
+    }**/
 
 }
