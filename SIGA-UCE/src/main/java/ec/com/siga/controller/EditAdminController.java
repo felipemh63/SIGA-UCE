@@ -33,6 +33,6 @@ public class EditAdminController {
 		} else {
 			model.addAttribute("result", 0);
 		}
-		return "/dashboardAdmin";
+		return "dashboardAdmin";
 	}
 }
