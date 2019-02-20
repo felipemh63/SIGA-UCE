@@ -19,7 +19,23 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
-
+    
+		    <script  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		  
+		    <!-- Carga enabled-->
+					<script type="text/javascript">
+					$(document).ready(function()
+							{var valorCheck = $('#enable').is(":checked");	
+							if(valorCheck){
+								$("#enabled").prop('checked', true);
+								}
+								else
+								$("#enabled").prop('checked', false);
+						
+							});	
+							
+					</script>
+    
   </head>
 
   <body class="bg-dark">
@@ -44,7 +60,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input type="text" id="lastName" class="form-control" th:field="*{apellido}" placeholder="Last name" required="required">
+                    <input type="text" id="lastName" class="form-control" th:field="*{apellido}" th:value="${apellido}" placeholder="Last name" required="required">
                     <label for="lastName">Last name</label>
                   </div>
                 </div>
@@ -52,13 +68,13 @@
             </div>
             <div class="form-group">
               <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" th:field="*{correoElectronico}" placeholder="Email address">
+                <input type="email" id="inputEmail" class="form-control" th:field="*{correoElectronico}" th:value="${correoElectronico}" placeholder="Email address">
                 <label for="inputEmail">Email address</label>
               </div>
             </div>
             <div class="form-group">
               <div class="form-label-group">
-                <input type="text" id="inputAddress" class="form-control" th:field="*{correoElectronico}" placeholder="Address">
+                <input type="text" id="inputAddress" class="form-control" th:field="*{direccionId}" th:value="${direccionId}" placeholder="Address">
                 <label for="inputAddress">Address</label>
               </div>
             </div>
@@ -66,13 +82,13 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input type="number" id="inputPhone1" class="form-control" th:field="*{numeroTelefono1}" placeholder="Phone 1" required="required">
+                    <input type="number" id="inputPhone1" class="form-control" th:field="*{numeroTelefono1}" th:value="${numeroTelefono1}" placeholder="Phone 1" required="required">
                     <label for="inputPhone1">Phone 1</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input type="number" id="inpumPhone2" class="form-control" th:field="*{numeroTelefono2}"  placeholder="Phone 2" required="required">
+                    <input type="number" id="inpumPhone2" class="form-control" th:field="*{numeroTelefono2}" th:value="${numeroTelefono2}"  placeholder="Phone 2" required="required">
                     <label for="inputPhone2">Phone 2</label>
                   </div>
                 </div>
@@ -82,27 +98,40 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input type="text" id="inputPassword" class="form-control"  th:field="*{usuario}" placeholder="User Name" required="required">
+                    <input type="text" id="inputPassword" class="form-control"  th:field="*{usuario}" th:value="${usuario}" placeholder="User Name" required="required">
                     <label for="inputUsername">User Name</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input type="text" id="inputPassword" class="form-control" th:field="*{clave}"  placeholder="Password" required="required">
+                    <input type="text" id="inputPassword" class="form-control" th:field="*{clave}"  th:value="${clave}" placeholder="Password" required="required">
                     <label for="inputPassword">Password</label>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-auto my-1">
-      <div class="custom-control custom-checkbox mr-sm-2">
-        <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-        <label class="custom-control-label" for="customControlAutosizing">Enabled</label>
-      </div>
-    </div>
-            <a class="btn btn-primary btn-block" href="login.html">Edit</a>
+            <div class="col-auto my-6">
+      		      <div class="form-group">
+			    <label >Enabled</label>
+			    <select class="form-control" th:field="*{enabled}" th:value="${enabled}">
+			      <option value="true">true</option>
+			      <option value="false">false</option>
+			    </select>
+			  </div>
+    
+    		</div>
+     				<button class="btn btn-primary btn-block" type="submit">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Edit Administrator
+				</button>
             </form>
-          
+            <div class="form-group">
+					<a href="#" th:href="@{/cancel}">
+						<button class="btn btn-primary btn-block" type="submit">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							Cancel
+						</button>
+					</a>
+				</div>
      
 
           <div class="text-center">

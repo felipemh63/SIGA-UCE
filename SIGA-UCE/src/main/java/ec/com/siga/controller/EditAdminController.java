@@ -24,6 +24,10 @@ public class EditAdminController {
 		model.addAttribute("contactModel", userRepository.findById(id));
 		return "/editAdmin";
 	}
+	@GetMapping("/cancel")
+	public String cancel() {
+		return "redirect:/dashboardAdmin";
+	}
 	
 	@PostMapping("/addcontact")
 	public String addContact(@ModelAttribute(name = "contactModel") User contactModel, Model model) {
