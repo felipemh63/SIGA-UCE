@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>SB Admin - Register</title>
+
+<!-- Bootstrap core CSS-->
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom fonts for this template-->
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+
+<!-- Custom styles for this template-->
+<link href="css/sb-admin.css" rel="stylesheet">
+
+<script  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    
+		    <script>
+			$(document).ready(function(){
+				$('#addDir').on('click',function(){
+				    $('.modal-body').load('addAddress',function(){
+				        $('#addressmodal').modal({show:true});
+				    });
+				});
+			});
+			</script>
+		
+		<script>
+			function pais(){
+				var pais = document.getElementById("pais");
+				var state = document.getElementById("statesList");
+				if(pais.value != null)
+					$('#statesList').removeAttr('disabled');
+			}
+			</script>
+</head>
+
+<body class="bg-dark">
+
+	<div class="container">
+		<div class="card card-register mx-auto mt-5">
+			<div class="card-header">Add Address</div>
+			<div class="card-body">
+
+
+
+				<!-- Add address-->
+
+				<form action="#" th:action="@{/addAddress}" th:object="${parroquias}" method="post">
+					<div class="form-group">
+
+						<label>Address Tip</label>
+						<div class="form-label-group">
+							<select class="form-control" name="TipoDireccion" >
+								<option th:each="parroquia : ${parroquias}" th:value="${parroquia.parroquiaId}" th:text="${parroquia.parroquia}" th:selected="false"/>
+							</select>
+						</div>
+
+						<label>Country</label>
+						<div class="form-label-group">
+							<select class="form-control" name="contry">
+								<option th:each="parroquia : ${parroquias}" th:value="${parroquia.parroquiaId}" th:text="${parroquia.parroquia}" th:selected="false" id="pais" onselect="pais()"/>
+							</select>
+						</div>
+						
+						<label>Province / State</label>
+						<div class="form-label-group">
+							<select class="form-control" name="state" id="statesList" disabled >
+								<option th:each="parroquia : ${parroquias}" th:value="${parroquia.parroquiaId}" th:text="${parroquia.parroquia}" th:selected="false"/>
+							</select>
+						</div>
+						
+						<label>Canton</label>
+						<div class="form-label-group">
+							<select class="form-control" name="canton" disabled>
+								<option th:each="parroquia : ${parroquias}" th:value="${parroquia.parroquiaId}" th:text="${parroquia.parroquia}" th:selected="false"/>
+							</select>
+						</div>
+						
+						<label>Parish</label>
+						<div class="form-label-group">
+							<select class="form-control" name="parish" disabled>
+								<option th:each="parroquia : ${parroquias}" th:value="${parroquia.parroquiaId}" th:text="${parroquia.parroquia}" th:selected="false"/>
+							</select>
+						</div>						
+
+
+					</div>
+
+					<button class="btn btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+						Add Address
+					</button>
+				</form>
+				<div class="form-group">
+					<a href="#" th:href="@{/cancel}">
+						<button class="btn btn-primary btn-block" type="submit">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							Cancel
+						</button>
+					</a>
+				</div>
+
+
+				<div class="text-center">
+					<a class="d-block small mt-3" href="login.html">Login Page</a> <a
+						class="d-block small" href="forgot-password.html">Forgot
+						Password?</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<!-- Bootstrap core JavaScript-->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+</body>
+
+</html>
