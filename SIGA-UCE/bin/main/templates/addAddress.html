@@ -22,26 +22,18 @@
 <!-- Custom styles for this template-->
 <link href="css/sb-admin.css" rel="stylesheet">
 
-<script  src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    
-		    <script>
-			$(document).ready(function(){
-				$('#addDir').on('click',function(){
-				    $('.modal-body').load('addAddress',function(){
-				        $('#addressmodal').modal({show:true});
-				    });
-				});
+  <script  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  
+		<!-- Al seleccionar pais habilitar provincia-->
+		<script type="text/javascript">
+		$('#country').change(function(){
+			  $('#provinciaList').removeAttr('disabled');
+			  $('#canton').load('cargaCanton', "id="+$('#country').val());
+
 			});
 			</script>
 		
-		<script>
-			function pais(){
-				var pais = document.getElementById("pais");
-				var state = document.getElementById("statesList");
-				if(pais.value != null)
-					$('#statesList').removeAttr('disabled');
-			}
-			</script>
+			
 </head>
 
 <body class="bg-dark">
@@ -60,29 +52,30 @@
 
 						<label>Address Tip</label>
 						<div class="form-label-group">
-							<select class="form-control" name="TipoDireccion" >
-								<option th:each="parroquia : ${parroquias}" th:value="${parroquia.parroquiaId}" th:text="${parroquia.parroquia}" th:selected="false"/>
+							<select class="form-control" name="TipoDireccion" required >
+								<option th:each="parroquia : ${parroquias}" th:value="${parroquia.parroquiaId}" th:text="${parroquia.parroquia}"/>
 							</select>
 						</div>
 
 						<label>Country</label>
 						<div class="form-label-group">
-							<select class="form-control" name="contry">
-								<option th:each="parroquia : ${parroquias}" th:value="${parroquia.parroquiaId}" th:text="${parroquia.parroquia}" th:selected="false" id="pais" onselect="pais()"/>
+							<select class="form-control" id="country" required>
+								<option value="0" disabled selected>Select country</option>
+								<option value="1" >Ecuador</option>
 							</select>
 						</div>
 						
 						<label>Province / State</label>
 						<div class="form-label-group">
-							<select class="form-control" name="state" id="statesList" disabled >
-								<option th:each="parroquia : ${parroquias}" th:value="${parroquia.parroquiaId}" th:text="${parroquia.parroquia}" th:selected="false"/>
+							<select class="form-control" id="provinciaList" disabled required>
+								<option th:each="provincia : ${provincias}" th:value="${provincia.provinciaId}" th:text="${provincia.provincia}"/>
 							</select>
 						</div>
 						
 						<label>Canton</label>
 						<div class="form-label-group">
-							<select class="form-control" name="canton" disabled>
-								<option th:each="parroquia : ${parroquias}" th:value="${parroquia.parroquiaId}" th:text="${parroquia.parroquia}" th:selected="false"/>
+							<select class="form-control" id="canton" disabled>
+								<option th:each="canton : ${cantones}" th:value="${canton.cantonId}" th:text="${canton.canton}"/>
 							</select>
 						</div>
 						
