@@ -24,7 +24,7 @@ import ec.com.siga.repository.ParroquiaJpaRepository;
 import ec.com.siga.repository.ProvinciaJpaRepository;
 
 @Controller
-public class AddAddressController {
+public class AddRegisterController {
 
 	@Autowired
 	@Qualifier("parroquiaRepository")
@@ -46,23 +46,22 @@ public class AddAddressController {
 	@Qualifier("direccionRepository")
 	private DireccionRepository direccionRepository;
 
-	@GetMapping("/addAddress")
+	@GetMapping("/addRegister")
 	public ModelAndView showForm() {
-		ModelAndView mav = new ModelAndView("addAddress");
-		mav.addObject("paices", paisRepository.findAll());
-		//mav.addObject("provincias", provinciaRepository.findAll());
+		ModelAndView mav = new ModelAndView("addRegister");
+		mav.addObject("paises", paisRepository.findAll());
 		return mav;
 	}
 	
 	
 
-	@PostMapping("/addAddress")
-	public String addContact(@ModelAttribute(name = "addressModel") Direccion addressModel, Model model) {
+	@PostMapping("/addRegister")
+	public String addContact(@ModelAttribute(name = "registerModel") Direccion registerModel, Model model1) {
 
-		if (null != direccionRepository.save(addressModel)) {
-			model.addAttribute("result", 1);
+		if (null != direccionRepository.save(registerModel)) {
+			model1.addAttribute("result", 1);
 		} else {
-			model.addAttribute("result", 0);
+			model1.addAttribute("result", 0);
 		}
 		return "/dashboardAdmin";
 	}
