@@ -27,12 +27,44 @@
 		<!-- Al seleccionar pais habilitar provincia-->
 		<script type="text/javascript">
 		$('#country').change(function(){
-			  $('#provinciaList').removeAttr('disabled');
-			  $('#canton').load('cargaCanton', "id="+$('#country').val());
-
-			});
+			$('#provinciaList').removeAttr('disabled');
+	        $.getJSON('selectProvincia',"login="+$('#country').val(),function(obj) {
+	        	$.each(obj, function(arregloId, provincia){
+	        		 $(".provin select").append('<option value="'+provincia.provinciaId+'">'+provincia.provincia+'</option>');
+	        		     });
+	                  }
+	        )
+	        
+	    } );
 			</script>
-		
+			
+			<!-- Al seleccionar provincia habilitar canton-->
+		<script type="text/javascript">
+		$('#provinciaList').change(function(){
+			$('#canton').removeAttr('disabled');
+	        $.getJSON('selectCanton',"login="+$('#provinciaList').val(),function(obj) {
+	        	$.each(obj, function(arregloId, canton){
+	        		 $(".can select").append('<option value="'+canton.cantonId+'">'+canton.canton+'</option>');
+	        		     });
+	                  }
+	        )
+	        
+	    } );
+			</script>
+			
+		<!-- Al seleccionar canton habilitar parroquia-->
+		<script type="text/javascript">
+		$('#canton').change(function(){
+			$('#parish').removeAttr('disabled');
+	        $.getJSON('selectparish',"login="+$('#canton').val(),function(obj) {
+	        	$.each(obj, function(arregloId, parroquia){
+	        		 $(".par select").append('<option value="'+parroquia.parroquiaId+'">'+parroquia.parroquia+'</option>');
+	        		     });
+	                  }
+	        )
+	        
+	    } );
+			</script>
 			
 </head>
 
@@ -50,10 +82,10 @@
 				<form action="#" th:action="@{/addAddress}" th:object="${parroquias}" method="post">
 					<div class="form-group">
 
-						<label>Address Tip</label>
+						<label>Address Tipe</label>
 						<div class="form-label-group">
 							<select class="form-control" name="TipoDireccion" required >
-								<option th:each="parroquia : ${parroquias}" th:value="${parroquia.parroquiaId}" th:text="${parroquia.parroquia}"/>
+								<option th:each="addressTipe : ${addressTipes}" th:value="${addressTipe.direccionTipoId}" th:text="${addressTipe.descripcionDireccionTipo}"/>
 							</select>
 						</div>
 
@@ -61,28 +93,28 @@
 						<div class="form-label-group">
 							<select class="form-control" id="country" required>
 								<option value="0" disabled selected>Select country</option>
-								<option value="1" >Ecuador</option>
+								<option th:each="pais : ${paices}" th:value="${pais.paisId}" th:text="${pais.pais}"/>
 							</select>
 						</div>
 						
 						<label>Province / State</label>
-						<div class="form-label-group">
+						<div class="form-label-group provin">
 							<select class="form-control" id="provinciaList" disabled required>
-								<option th:each="provincia : ${provincias}" th:value="${provincia.provinciaId}" th:text="${provincia.provincia}"/>
+								
 							</select>
 						</div>
 						
 						<label>Canton</label>
-						<div class="form-label-group">
-							<select class="form-control" id="canton" disabled>
-								<option th:each="canton : ${cantones}" th:value="${canton.cantonId}" th:text="${canton.canton}"/>
+						<div class="form-label-group can">
+							<select class="form-control" id="canton" disabled required>
+
 							</select>
 						</div>
 						
 						<label>Parish</label>
-						<div class="form-label-group">
-							<select class="form-control" name="parish" disabled>
-								<option th:each="parroquia : ${parroquias}" th:value="${parroquia.parroquiaId}" th:text="${parroquia.parroquia}" th:selected="false"/>
+						<div class="form-label-group par">
+							<select class="form-control" id="parish" disabled>
+		
 							</select>
 						</div>						
 

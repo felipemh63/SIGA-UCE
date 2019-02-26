@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author Stalin
@@ -34,6 +36,7 @@ public class DireccionTipo implements Serializable {
 	@Column(name = "DESCRIPCION_DIRECCION_TIPO")
 	private String descripcionDireccionTipo;
 	@OneToMany(mappedBy = "direccionTipoId")
+	@JsonIgnore
 	private List<Direccion> direccionList;
 
 	public Integer getDireccionTipoId() {

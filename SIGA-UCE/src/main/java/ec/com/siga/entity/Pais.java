@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "pais")
 public class Pais implements Serializable {
@@ -28,6 +30,7 @@ public class Pais implements Serializable {
 	@Column(name = "PAIS")
 	private String pais;
 	@OneToMany(mappedBy = "paisId", fetch = FetchType.EAGER)
+	@JsonIgnore
 	private List<ProvinciaEstado> provinciaEstadoList;
 
 	public Integer getPaisId() {
@@ -63,5 +66,11 @@ public class Pais implements Serializable {
 
 	public Pais() {
 	}
+
+	@Override
+	public String toString() {
+		return "Pais [paisId=" + paisId + ", pais=" + pais + ", provinciaEstadoList=" + provinciaEstadoList + "]";
+	}
+	
 
 }

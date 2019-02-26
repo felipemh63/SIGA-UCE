@@ -10,6 +10,6 @@ import ec.com.siga.entity.User;
 @Repository("userRepository")
 public interface UserJpaRepository extends JpaRepository<User, Serializable>{
 	
-	public abstract User findByUsuario(String usuario);
+	public abstract User findByUsuario(String usuario); // usa spring security para devolver el usuario logiado
 	
 }

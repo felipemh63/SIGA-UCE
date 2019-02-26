@@ -12,6 +12,8 @@ import ec.com.siga.entity.ProvinciaEstado;
 @Repository("provinciaRepository")
 public interface ProvinciaJpaRepository extends JpaRepository<ProvinciaEstado, Serializable>{
 	
-	public abstract List<ProvinciaEstado> findByPaisId(Pais paisId);
+	public abstract List<ProvinciaEstado> findAllByPaisId(Pais pais);
+	//public abstract 
+	
 	
 }
