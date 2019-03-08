@@ -15,6 +15,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 @Entity
 @Table(name = "provincia_estado")
 public class ProvinciaEstado implements Serializable {
@@ -30,8 +33,10 @@ public class ProvinciaEstado implements Serializable {
 	private String provincia;
 	@JoinColumn(name = "PAIS_ID", referencedColumnName = "PAIS_ID")
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonIgnore
 	private Pais paisId;
 	@OneToMany(mappedBy = "provinciaId", fetch = FetchType.EAGER)
+	@JsonIgnore
 	private List<Canton> cantonList;
 	public Integer getProvinciaId() {
 		return provinciaId;

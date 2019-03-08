@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -17,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -35,10 +38,12 @@ public class Canton implements Serializable {
 	@Size(max = 35)
 	@Column(name = "CANTON")
 	private String canton;
-	@OneToMany(mappedBy = "cantonId")
+	@OneToMany(mappedBy = "cantonId" , fetch = FetchType.EAGER)
+	@JsonIgnore
 	private List<Parroquia> parroquiaList;
 	@JoinColumn(name = "PROVINCIA_ID", referencedColumnName = "PROVINCIA_ID")
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonIgnore
 	private ProvinciaEstado provinciaId;
 
 	public Integer getCantonId() {
