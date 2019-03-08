@@ -54,7 +54,11 @@ public class AddAddressController {
 		return mav;
 	}
 	
-	
+	@RequestMapping("/cargaCanton")
+	public @ResponseBody ArrayList<ProvinciaEstado> showProvince(@RequestParam(name = "id", required = true) String id) {
+		System.out.println(id);
+		return new ArrayList<> (provinciaRepository.findByPaisId(Integer.valueOf(id)));
+	}
 
 	@PostMapping("/addAddress")
 	public String addContact(@ModelAttribute(name = "addressModel") Direccion addressModel, Model model) {
